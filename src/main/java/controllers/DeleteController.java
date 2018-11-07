@@ -31,4 +31,8 @@ public class DeleteController {
         stage.show();
     }
 
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
 }

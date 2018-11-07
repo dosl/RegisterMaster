@@ -41,10 +41,19 @@ public class HomeController {
     public void deleteOnAction(ActionEvent event) throws IOException {
         Button button = (Button) event.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DeleteView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReportView.fxml"));
         stage.setScene(new Scene((Parent) loader.load()));
-        ReportController reportController = loader.getController();
-        reportController.setSubject(subject);
+        DeleteController deleteController = loader.getController();
+        deleteController.setSubject(subject);
+        stage.show();
+    }
+    public void addOnAction(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/AddView.fxml"));
+        stage.setScene(new Scene((Parent) loader.load()));
+        AddController addController = loader.getController();
+        addController.setSubject(subject);
         stage.show();
     }
 

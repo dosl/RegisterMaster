@@ -14,7 +14,9 @@
           <TableColumn prefWidth="155.99996948242188" text="nameSubject" />
             <TableColumn prefWidth="70.0" text="year" />
             <TableColumn prefWidth="82.0" text="term" />
-            <TableColumn prefWidth="718.0" text="PreviousSubject" />
+            <TableColumn prefWidth="555.0" text="PreviousSubject" />
+            <TableColumn prefWidth="68.0" text="Status" />
+            <TableColumn prefWidth="95.0" text="Color" />
         </columns>
       </TableView>
       <Button layoutX="567.0" layoutY="499.0" mnemonicParsing="false" onAction="#backButtonOnAction" text="Back">

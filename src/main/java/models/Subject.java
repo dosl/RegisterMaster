@@ -5,14 +5,16 @@ public class Subject {
     private String subjectName;
     private String previousSubject;
     private int year,term;
+    private String color;
 
 
-    public Subject(String subjectID, String getSubjectName, String previousSubject, int year, int term) {
+    public Subject(String subjectID, String getSubjectName, String previousSubject, int year, int term, String color) {
         this.subjectID = subjectID;
         this.subjectName = getSubjectName;
         this.previousSubject = previousSubject;
         this.year = year;
         this.term = term;
+        this.color = color;
     }
 
     public String getSubjectID() {
@@ -53,5 +55,12 @@ public class Subject {
 
     public void setTerm(int term) {
         this.term = term;
+    }
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }
