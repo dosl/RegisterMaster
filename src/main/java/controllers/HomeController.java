@@ -1,11 +1,13 @@
 package controllers;
 
+import databases.SubjectDBConnector;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import models.Subject;
@@ -15,9 +17,17 @@ import java.io.IOException;
 public class HomeController {
     private Subject subject;
     @FXML
-    Button createButton, reportButton,deleteButton;
+    Button createButton, reportButton,deleteButton,addButton;
     @FXML
     TableView tableView;
+    @FXML
+    TableColumn IDSubject,nameSubject,year,term,previousSubject,status,color;
+
+
+    public void initialize(){
+        tableView.setItems(SubjectDBConnector.getSubject());
+        System.out.println(SubjectDBConnector.getSubject());
+    }
 
     public void createOnAction(ActionEvent actionEvent) throws IOException {
         Button button = (Button) actionEvent.getSource();

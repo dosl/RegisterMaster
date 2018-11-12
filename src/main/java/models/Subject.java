@@ -4,16 +4,19 @@ public class Subject {
     private String subjectID;
     private String subjectName;
     private String previousSubject;
-    private int year,term;
+    private int year, term;
+    private boolean status;
     private String color;
 
 
-    public Subject(String subjectID, String getSubjectName, String previousSubject, int year, int term, String color) {
+
+    public Subject(String subjectID, String name, int year, int term, String previousSubject, boolean status, String color) {
         this.subjectID = subjectID;
-        this.subjectName = getSubjectName;
+        this.subjectName = name;
         this.previousSubject = previousSubject;
         this.year = year;
         this.term = term;
+        this.status = status;
         this.color = color;
     }
 
@@ -56,6 +59,15 @@ public class Subject {
     public void setTerm(int term) {
         this.term = term;
     }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
     public String getColor() {
         return color;
     }
