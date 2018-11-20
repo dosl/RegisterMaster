@@ -26,7 +26,6 @@ public class HomeController {
 
     public void initialize(){
         tableView.setItems(SubjectDBConnector.getSubject());
-        System.out.println(SubjectDBConnector.getSubject());
     }
 
     public void createOnAction(ActionEvent actionEvent) throws IOException {
@@ -51,7 +50,7 @@ public class HomeController {
     public void deleteOnAction(ActionEvent event) throws IOException {
         Button button = (Button) event.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/ReportView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/DeleteView.fxml"));
         stage.setScene(new Scene((Parent) loader.load()));
         DeleteController deleteController = loader.getController();
         deleteController.setSubject(subject);

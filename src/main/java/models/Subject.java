@@ -4,13 +4,13 @@ public class Subject {
     private String subjectID;
     private String subjectName;
     private String previousSubject;
-    private int year, term;
+    private String year, term;
     private boolean status;
     private String color;
 
 
 
-    public Subject(String subjectID, String name, int year, int term, String previousSubject, boolean status, String color) {
+    public Subject(String subjectID, String name, String year, String term, String previousSubject, boolean status, String color) {
         this.subjectID = subjectID;
         this.subjectName = name;
         this.previousSubject = previousSubject;
@@ -44,19 +44,19 @@ public class Subject {
         this.previousSubject = previousSubject;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
-    public int getTerm() {
+    public String getTerm() {
         return term;
     }
 
-    public void setTerm(int term) {
+    public void setTerm(String term) {
         this.term = term;
     }
 

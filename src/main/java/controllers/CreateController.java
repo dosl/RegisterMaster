@@ -1,5 +1,8 @@
 package controllers;
 
+import databases.SubjectDBConnector;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -16,13 +19,16 @@ import java.io.IOException;
 public class CreateController {
     private Subject subject;
     @FXML
-    ComboBox yearCombobox = new ComboBox();
+    ComboBox yearCombobox;
     @FXML
-    ComboBox termCombobox = new ComboBox();
+    ComboBox termCombobox;
+    @FXML
+    ComboBox colorBox;
     @FXML
     Button enterButton,cancelButton;
     @FXML
-    TextField subjectIDField,subjectNameField;
+    TextField subjectIDField,subjectNameField,previousSubjectField;
+    private ObservableList<String> colorList = FXCollections.observableArrayList("red","yellow","green");
     public void initialize(){
         yearCombobox.getItems().add("1");
         yearCombobox.getItems().add("2");
@@ -30,8 +36,13 @@ public class CreateController {
         yearCombobox.getItems().add("4");
         termCombobox.getItems().add("1");
         termCombobox.getItems().add("2");
+        colorBox.setItems(colorList);
+        colorBox.setValue("Please Select");
+
     }
-    public void enterOnAction(ActionEvent actionEvent){
+    public void enterOnAction(ActionEvent actionEvent) throws IOException {
+        SubjectDBConnector.createSubject(subjectIDField.getText(),subjectNameField.getText(),yearCombobox.getValue().toString(),termCombobox.getValue().toString(),previousSubjectField.getText(),false,colorBox.getValue().toString());
+        cancelOnAction(actionEvent);
 
     }
     public void cancelOnAction(ActionEvent actionEvent) throws IOException {

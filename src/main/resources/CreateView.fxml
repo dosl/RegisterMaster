@@ -49,6 +49,18 @@
                   <Font size="24.0" />
                </font>
             </Label>
+            <TextField fx:id="previousSubjectField" layoutX="327.0" layoutY="240.0" prefHeight="25.0" prefWidth="352.0" />
+            <Label layoutX="231.0" layoutY="240.0" prefHeight="25.0" prefWidth="80.0" text="วิชาก่อนหน้า">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="colorBox" layoutX="784.0" layoutY="240.0" prefWidth="150.0" />
+            <Label layoutX="712.0" layoutY="240.0" text="สี">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
          </children>
       </Pane>
    </children>

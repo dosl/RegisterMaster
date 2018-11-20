@@ -28,8 +28,8 @@ public class ReportController {
         Stage stage = (Stage) button.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/HomeView.fxml"));
         stage.setScene(new Scene((Parent) loader.load()));
-        CreateController createController = loader.getController();
-        createController.setSubject(subject);
+        HomeController homeController = loader.getController();
+        homeController.setSubject(subject);
         stage.show();
     }
 }
