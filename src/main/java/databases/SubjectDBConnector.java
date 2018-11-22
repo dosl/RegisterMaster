@@ -38,6 +38,23 @@ public class SubjectDBConnector {
         }
         return subjects;
     }
+    public static void resetSubject() {
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if (connection != null) {
+                String query = "update subject set status = '" + 0 + "'";
+                PreparedStatement p = connection.prepareStatement(query);
+                p.executeUpdate();
+                Statement statement = connection.createStatement();
+                connection.close();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void addSubject(String id, String name, String year, String term) {
         try {
@@ -80,7 +97,7 @@ public class SubjectDBConnector {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
-                String query = "Select * from subject where subject.subjectID=='" + id + "'";
+                String query = "Select previousSubject from subject where subject.subjectID=='" + id + "'";
                 PreparedStatement p = connection.prepareStatement(query);
                 p.executeUpdate();
                 Statement statement = connection.createStatement();
