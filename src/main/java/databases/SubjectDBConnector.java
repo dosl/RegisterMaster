@@ -92,7 +92,10 @@ public class SubjectDBConnector {
         }
     }
 
-    public static void searchSubject(String id) {
+    public static String searchSubject(String id) {
+        //not done!!!!!////
+        //try to get previousSubject
+        //use this in addController
         try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
@@ -108,6 +111,7 @@ public class SubjectDBConnector {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return id;
     }
     public static void deleteSubject(String id) {
         try {
