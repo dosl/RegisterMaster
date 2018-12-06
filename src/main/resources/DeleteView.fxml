@@ -41,12 +41,12 @@
          </font>
       </Label>
       <ComboBox fx:id="termCombobox" layoutX="924.0" layoutY="491.0" prefWidth="150.0" promptText="Term" />
-      <Button layoutX="465.0" layoutY="516.0" mnemonicParsing="false" onAction="#deleteOnAction" text="Enter">
+      <Button layoutX="464.0" layoutY="541.0" mnemonicParsing="false" onAction="#deleteOnAction" text="Enter">
          <font>
             <Font size="24.0" />
          </font>
       </Button>
-      <Button layoutX="681.0" layoutY="516.0" mnemonicParsing="false" onAction="#cancelOnAction" text="Cancel">
+      <Button layoutX="683.0" layoutY="541.0" mnemonicParsing="false" onAction="#cancelOnAction" text="Cancel">
          <font>
             <Font size="24.0" />
          </font>

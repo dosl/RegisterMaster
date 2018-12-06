@@ -25,11 +25,12 @@ public class CreateController {
     @FXML
     ComboBox colorBox;
     @FXML
-    Button enterButton,cancelButton;
+    Button enterButton, cancelButton;
     @FXML
-    TextField subjectIDField,subjectNameField,previousSubjectField;
-    private ObservableList<String> colorList = FXCollections.observableArrayList("red","yellow","green");
-    public void initialize(){
+    TextField subjectIDField, subjectNameField, previousSubjectField;
+    private ObservableList<String> colorList = FXCollections.observableArrayList("red", "yellow", "green");
+
+    public void initialize() {
         yearCombobox.getItems().add("1");
         yearCombobox.getItems().add("2");
         yearCombobox.getItems().add("3");
@@ -40,11 +41,23 @@ public class CreateController {
         colorBox.setValue("Please Select");
 
     }
+
     public void enterOnAction(ActionEvent actionEvent) throws IOException {
-        SubjectDBConnector.createSubject(subjectIDField.getText(),subjectNameField.getText(),yearCombobox.getValue().toString(),termCombobox.getValue().toString(),previousSubjectField.getText(),false,colorBox.getValue().toString());
-        cancelOnAction(actionEvent);
+        if (subjectIDField.getText() != null && subjectNameField.getText() != null && yearCombobox.getValue().toString() != null && termCombobox.getValue().toString() != null) {
+            SubjectDBConnector.createSubject(subjectIDField.getText(), subjectNameField.getText(), yearCombobox.getValue().toString(), termCombobox.getValue().toString(), previousSubjectField.getText(), false, colorBox.getValue().toString());
+            cancelOnAction(actionEvent);
+        } else {
+            Button button = (Button) actionEvent.getSource();
+            Stage stage = (Stage) button.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Error.fxml"));
+            stage.setScene(new Scene((Parent) loader.load()));
+            ErrorController errorController = loader.getController();
+            stage.show();
+        }
+
 
     }
+
     public void cancelOnAction(ActionEvent actionEvent) throws IOException {
         Button button = (Button) actionEvent.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
@@ -54,7 +67,6 @@ public class CreateController {
         homeController.setSubject(subject);
         stage.show();
     }
-
 
 
     public void setSubject(Subject subject) {
