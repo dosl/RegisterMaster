@@ -5,10 +5,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.Subject;
 
@@ -25,6 +22,8 @@ public class EditController {
     Button enterButton,cancelButton;
     @FXML
     TextField subjectIDField,subjectNameField;
+    @FXML
+    TableColumn colorColumn;
     public void initialize(){
         yearCombobox.getItems().add("1");
         yearCombobox.getItems().add("2");
@@ -32,6 +31,33 @@ public class EditController {
         yearCombobox.getItems().add("4");
         termCombobox.getItems().add("1");
         termCombobox.getItems().add("2");
+
+        //set color failed
+//        colorColumn.setCellFactory(column -> {
+//            return new TableCell() {
+//                @Override
+//                protected void updateItem(LocalDate item, boolean empty) {
+//                    super.updateItem(item, empty);
+//
+//                    if (item == null || empty) {
+//                        setText(null);
+//                        setStyle("");
+//                    } else {
+//                        // Format date.
+//                        setText(myDateFormatter.format(item));
+//
+//                        // Style all dates in March with a different color.
+//                        if (item.getMonth() == Month.MARCH) {
+//                            setTextFill(Color.CHOCOLATE);
+//                            setStyle("-fx-background-color: yellow");
+//                        } else {
+//                            setTextFill(Color.BLACK);
+//                            setStyle("");
+//                        }
+//                    }
+//                }
+//            };
+//        });
     }
     public void enterOnAction(ActionEvent actionEvent){
 

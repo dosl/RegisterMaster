@@ -56,6 +56,7 @@ public class DeleteController {
         }
     }
     public void deleteOnAction(ActionEvent actionEvent) throws IOException {
+        //check not null textField if null go to error page
         SubjectDBConnector.deleteSubject(subjectIDField.getText());
         tableView.refresh();
         cancelOnAction(actionEvent);

@@ -43,6 +43,7 @@ public class CreateController {
     }
 
     public void enterOnAction(ActionEvent actionEvent) throws IOException {
+        //check not null textField if null go to error page
         if (subjectIDField.getText() != null && subjectNameField.getText() != null && yearCombobox.getValue().toString() != null && termCombobox.getValue().toString() != null) {
             SubjectDBConnector.createSubject(subjectIDField.getText(), subjectNameField.getText(), yearCombobox.getValue().toString(), termCombobox.getValue().toString(), previousSubjectField.getText(), false, colorBox.getValue().toString());
             cancelOnAction(actionEvent);
