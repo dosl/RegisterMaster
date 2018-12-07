@@ -1,6 +1,5 @@
 package databases;
 
-import controllers.TimeController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Subject;
@@ -40,6 +39,7 @@ public class SubjectDBConnector {
         }
         return subjects;
     }
+
     public static void resetSubject() {
         try {
             Class.forName(dbName);
@@ -115,12 +115,13 @@ public class SubjectDBConnector {
         }
         return id;
     }
+
     public static void deleteSubject(String id) {
         try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
-                String query = "Delete from subject where subject.subjectID=='" + id +"'";
+                String query = "Delete from subject where subject.subjectID=='" + id + "'";
                 PreparedStatement p = connection.prepareStatement(query);
                 p.executeUpdate();
                 connection.close();
@@ -132,9 +133,26 @@ public class SubjectDBConnector {
         }
     }
 
-    public static ArrayList<String> getPrevious(){
+    public static void editSubject(String id, String name, String year, String term, String previousSubject, String color) {
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if (connection != null) {
+                String query = "update subject set subjectName = '" + name + "', term = '" + term + "', year = '" + year + "', color = '" + color + "', previousSubject = '" + previousSubject + "' where subjectID = '" + id + "'";
+                PreparedStatement p = connection.prepareStatement(query);
+                p.executeUpdate();
+                connection.close();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<String> getPrevious() {
         ArrayList<String> preList = new ArrayList<String>();
-        try{
+        try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
@@ -156,22 +174,22 @@ public class SubjectDBConnector {
 
 
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
 
-        }catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return preList;
     }
 
-    public static boolean getStatus(String id){
+    public static boolean getStatus(String id) {
         try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
                 String query = "Select status from subject where subject.subjectID=='" + id + "'";
- //               PreparedStatement p = connection.prepareStatement(query);
+                //               PreparedStatement p = connection.prepareStatement(query);
 //                p.executeUpdate();
                 Statement statement = connection.createStatement();
                 Boolean status = statement.execute(query);
@@ -186,7 +204,8 @@ public class SubjectDBConnector {
         }
         return false;
     }
-    public static String getPreviousId(String id){
+
+    public static String getPreviousId(String id) {
         try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
@@ -196,7 +215,7 @@ public class SubjectDBConnector {
                 //p.executeUpdate();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
-                while (resultSet.next()){
+                while (resultSet.next()) {
                     String preid = resultSet.getString(1);
                     //System.out.println("POOM "+preid);
 
@@ -213,8 +232,9 @@ public class SubjectDBConnector {
 
         return "error";
     }
-    public static boolean isPreviousPassed(String id){
-        try{
+
+    public static boolean isPreviousPassed(String id) {
+        try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
@@ -223,7 +243,7 @@ public class SubjectDBConnector {
                 //p.executeUpdate();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
-                while (resultSet.next()){
+                while (resultSet.next()) {
                     boolean status = resultSet.getBoolean(1);
                     //boolean status = resultSet.getString(1);
                     //System.out.println("POOM "+preid);
@@ -234,9 +254,9 @@ public class SubjectDBConnector {
 
             }
 
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return false;

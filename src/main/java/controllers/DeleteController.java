@@ -1,17 +1,16 @@
 package controllers;
 
 import databases.SubjectDBConnector;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import models.Subject;
 
@@ -29,8 +28,35 @@ public class DeleteController {
     TextField subjectIDField,subjectNameField;
     @FXML
     TableView tableView;
+    @FXML
+    private TableColumn<Subject,String> level;
 
     public void initialize(){
+        level.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getColor()));
+        level.setCellFactory(column -> {
+            return new TableCell<Subject, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if(empty){
+                        setText(null);
+                        setStyle("");
+                    }else {
+                        setText(item);
+                        setTextFill(Color.WHITE);
+                        if (item.equalsIgnoreCase("hard")) {
+                            setStyle("-fx-background-color: red");
+                        }else if(item.equalsIgnoreCase("normal")){
+                            setStyle("-fx-background-color: blue");
+                        }else if(item.equalsIgnoreCase("easy")){
+                            setStyle("-fx-background-color: green");
+                        }
+                    }
+                }
+
+            };
+
+        });
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
                 if (event.getClickCount() == 1) {

@@ -10,17 +10,17 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
     <children>
-        <Button fx:id="createButton" layoutX="238.0" layoutY="471.0" mnemonicParsing="false" onAction="#createOnAction" prefHeight="51.0" prefWidth="117.0" text="Create">
+        <Button fx:id="createButton" layoutX="92.0" layoutY="471.0" mnemonicParsing="false" onAction="#createOnAction" prefHeight="51.0" prefWidth="117.0" text="Create">
             <font>
                 <Font size="24.0" />
             </font>
         </Button>
-        <Button fx:id="reportButton" layoutX="893.0" layoutY="471.0" mnemonicParsing="false" onAction="#resetOnAction" text="Reset">
+        <Button fx:id="reportButton" layoutX="1012.0" layoutY="471.0" mnemonicParsing="false" onAction="#resetOnAction" text="Reset">
             <font>
                 <Font size="24.0" />
             </font>
         </Button>
-        <Button fx:id="deleteButton" layoutX="671.0" layoutY="471.0" mnemonicParsing="false" onAction="#deleteOnAction" text="Delete">
+        <Button fx:id="deleteButton" layoutX="773.0" layoutY="471.0" mnemonicParsing="false" onAction="#deleteOnAction" text="Delete">
             <font>
                 <Font size="24.0" />
             </font>
@@ -69,10 +69,15 @@
                 <Font size="24.0" />
             </font>
         </Label>
-        <Button fx:id="addButton" layoutX="473.0" layoutY="471.0" mnemonicParsing="false" onAction="#addOnAction" text="Add">
+        <Button fx:id="addButton" layoutX="352.0" layoutY="471.0" mnemonicParsing="false" onAction="#addOnAction" text="Add">
             <font>
                 <Font size="24.0" />
             </font>
         </Button>
+      <Button fx:id="editButton" layoutX="562.0" layoutY="471.0" mnemonicParsing="false" onAction="#editOnAction" text="Edit">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Button>
     </children>
 </AnchorPane>

@@ -20,7 +20,7 @@ import java.io.IOException;
 public class HomeController {
     private Subject subject;
     @FXML
-    Button createButton, reportButton,deleteButton,addButton;
+    Button createButton, reportButton,deleteButton,addButton,editButton;
     @FXML
     TableView tableView;
     @FXML
@@ -94,6 +94,15 @@ public class HomeController {
         stage.setScene(new Scene((Parent) loader.load()));
         AddController addController = loader.getController();
         addController.setSubject(subject);
+        stage.show();
+    }
+    public void editOnAction(ActionEvent event) throws IOException {
+        Button button = (Button) event.getSource();
+        Stage stage = (Stage) button.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditView.fxml"));
+        stage.setScene(new Scene((Parent) loader.load()));
+        EditController editController = loader.getController();
+        editController.setSubject(subject);
         stage.show();
     }
 

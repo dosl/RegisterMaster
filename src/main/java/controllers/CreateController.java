@@ -23,7 +23,7 @@ public class CreateController {
     @FXML
     ComboBox termCombobox;
     @FXML
-    ComboBox colorBox;
+    ComboBox levelComboBox;
     @FXML
     Button enterButton, cancelButton;
     @FXML
@@ -35,8 +35,8 @@ public class CreateController {
     public void initialize() {
         yearCombobox.setItems(yearList);
         termCombobox.setItems(termList);
-        colorBox.setItems(colorList);
-        colorBox.setValue("Please Select");
+        levelComboBox.setItems(colorList);
+        levelComboBox.setValue("Please Select");
         yearCombobox.setValue("Please Select");
         termCombobox.setValue("Please Select");
 
@@ -45,7 +45,7 @@ public class CreateController {
 
     public void enterOnAction(ActionEvent actionEvent) throws IOException {
         //check not null textField if null go to error page
-        if (termCombobox.getValue() == "Please Select" || yearCombobox.getValue() == "Please Select" || colorBox.getValue() == "Please Select" || subjectNameField.getText().equals("") || subjectIDField.getText().equals("")) {
+        if (termCombobox.getValue() == "Please Select" || yearCombobox.getValue() == "Please Select" || levelComboBox.getValue() == "Please Select" || subjectNameField.getText().equals("") || subjectIDField.getText().equals("")) {
             Button button = (Button) actionEvent.getSource();
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Error.fxml"));
@@ -55,7 +55,7 @@ public class CreateController {
             stage.show();
         } else {
 
-            SubjectDBConnector.createSubject(subjectIDField.getText(), subjectNameField.getText(), yearCombobox.getValue().toString(), termCombobox.getValue().toString(), previousSubjectField.getText(), false, colorBox.getValue().toString());
+            SubjectDBConnector.createSubject(subjectIDField.getText(), subjectNameField.getText(), yearCombobox.getValue().toString(), termCombobox.getValue().toString(), previousSubjectField.getText(), false, levelComboBox.getValue().toString());
             cancelOnAction(actionEvent);
         }
 
