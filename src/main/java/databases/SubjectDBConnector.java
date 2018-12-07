@@ -1,10 +1,12 @@
 package databases;
 
+import controllers.TimeController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Subject;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class SubjectDBConnector {
     private static String dbURL = "jdbc:sqlite:subjectDB.db";
@@ -129,4 +131,116 @@ public class SubjectDBConnector {
             e.printStackTrace();
         }
     }
+
+    public static ArrayList<String> getPrevious(){
+        ArrayList<String> preList = new ArrayList<String>();
+        try{
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if (connection != null) {
+                String query = "select previousSubject from subject";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()) {
+//                    String id = resultSet.getString("subjectID");
+//                    String name = resultSet.getString("subjectName");
+//                    String year = resultSet.getString("year");
+//                    String term = resultSet.getString("term");
+                    String previousSubject = resultSet.getString("previousSubject");
+//                    boolean status = resultSet.getBoolean("status");
+//                    String color = resultSet.getString("color");
+                    //subjects.add(new Subject(id, name, year, term, previousSubject, status, color));
+                    preList.add(previousSubject);
+                }
+                connection.close();
+
+
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return preList;
+    }
+
+    public static boolean getStatus(String id){
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if (connection != null) {
+                String query = "Select status from subject where subject.subjectID=='" + id + "'";
+ //               PreparedStatement p = connection.prepareStatement(query);
+//                p.executeUpdate();
+                Statement statement = connection.createStatement();
+                Boolean status = statement.execute(query);
+                connection.close();
+                return status;
+
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    public static String getPreviousId(String id){
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if (connection != null) {
+                String query = "Select previousSubject from subject where subject.subjectID=='" + id + "'";
+                //PreparedStatement p = connection.prepareStatement(query);
+                //p.executeUpdate();
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()){
+                    String preid = resultSet.getString(1);
+                    //System.out.println("POOM "+preid);
+
+                    connection.close();
+                    return preid;
+                }
+
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return "error";
+    }
+    public static boolean isPreviousPassed(String id){
+        try{
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if (connection != null) {
+                String query = "Select status from subject where subject.subjectID=='" + id + "'";
+                //PreparedStatement p = connection.prepareStatement(query);
+                //p.executeUpdate();
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()){
+                    boolean status = resultSet.getBoolean(1);
+                    //boolean status = resultSet.getString(1);
+                    //System.out.println("POOM "+preid);
+
+                    connection.close();
+                    return status;
+                }
+
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+
 }

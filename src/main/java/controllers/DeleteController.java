@@ -29,10 +29,11 @@ public class DeleteController {
     TextField subjectIDField,subjectNameField;
     @FXML
     TableView tableView;
+
     public void initialize(){
         tableView.setOnMouseClicked(new EventHandler<MouseEvent>() {
             public void handle(MouseEvent event) {
-                if (event.getClickCount() > 1) {
+                if (event.getClickCount() == 1) {
                     DeleteController.this.onEdit();
                 }
             }
@@ -57,9 +58,20 @@ public class DeleteController {
     }
     public void deleteOnAction(ActionEvent actionEvent) throws IOException {
         //check not null textField if null go to error page
-        SubjectDBConnector.deleteSubject(subjectIDField.getText());
-        tableView.refresh();
-        cancelOnAction(actionEvent);
+        if (termCombobox.getValue() == "Please Select" || yearCombobox.getValue() == "Please Select" || subjectNameField.getText().equals("") || subjectIDField.getText().equals("")){
+            Button button = (Button) actionEvent.getSource();
+            Stage stage = new Stage();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/Error.fxml"));
+            stage.setScene(new Scene((Parent) loader.load()));
+            ErrorController errorController = loader.getController();
+            errorController.setLabel("Please double click subject");
+            stage.show();
+        }else{
+            SubjectDBConnector.deleteSubject(subjectIDField.getText());
+            tableView.refresh();
+            cancelOnAction(actionEvent);
+        }
+
     }
     public void cancelOnAction(ActionEvent actionEvent) throws IOException {
         javafx.scene.control.Button button = (javafx.scene.control.Button) actionEvent.getSource();

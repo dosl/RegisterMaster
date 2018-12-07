@@ -75,4 +75,9 @@ public class Subject {
     public void setColor(String color) {
         this.color = color;
     }
+
+    @Override
+    public String toString() {
+        return getSubjectID()+" "+getPreviousSubject();
+    }
 }

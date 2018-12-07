@@ -44,7 +44,7 @@
                   <PropertyValueFactory property="status" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="95.0" text="Color">
+            <TableColumn fx:id="level" prefWidth="95.0" text="Color">
                <cellValueFactory>
                   <PropertyValueFactory property="color" />
                </cellValueFactory>

@@ -28,32 +28,35 @@ public class CreateController {
     Button enterButton, cancelButton;
     @FXML
     TextField subjectIDField, subjectNameField, previousSubjectField;
-    private ObservableList<String> colorList = FXCollections.observableArrayList("red", "yellow", "green");
+    private ObservableList<String> colorList = FXCollections.observableArrayList("hard", "normal", "easy");
+    private ObservableList<String> termList = FXCollections.observableArrayList("1", "2");
+    private ObservableList<String> yearList = FXCollections.observableArrayList("1", "2", "3", "4");
 
     public void initialize() {
-        yearCombobox.getItems().add("1");
-        yearCombobox.getItems().add("2");
-        yearCombobox.getItems().add("3");
-        yearCombobox.getItems().add("4");
-        termCombobox.getItems().add("1");
-        termCombobox.getItems().add("2");
+        yearCombobox.setItems(yearList);
+        termCombobox.setItems(termList);
         colorBox.setItems(colorList);
         colorBox.setValue("Please Select");
+        yearCombobox.setValue("Please Select");
+        termCombobox.setValue("Please Select");
+
 
     }
 
     public void enterOnAction(ActionEvent actionEvent) throws IOException {
         //check not null textField if null go to error page
-        if (subjectIDField.getText() != null && subjectNameField.getText() != null && yearCombobox.getValue().toString() != null && termCombobox.getValue().toString() != null) {
-            SubjectDBConnector.createSubject(subjectIDField.getText(), subjectNameField.getText(), yearCombobox.getValue().toString(), termCombobox.getValue().toString(), previousSubjectField.getText(), false, colorBox.getValue().toString());
-            cancelOnAction(actionEvent);
-        } else {
+        if (termCombobox.getValue() == "Please Select" || yearCombobox.getValue() == "Please Select" || colorBox.getValue() == "Please Select" || subjectNameField.getText().equals("") || subjectIDField.getText().equals("")) {
             Button button = (Button) actionEvent.getSource();
-            Stage stage = (Stage) button.getScene().getWindow();
+            Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Error.fxml"));
             stage.setScene(new Scene((Parent) loader.load()));
             ErrorController errorController = loader.getController();
+            errorController.setLabel("Please input all field");
             stage.show();
+        } else {
+
+            SubjectDBConnector.createSubject(subjectIDField.getText(), subjectNameField.getText(), yearCombobox.getValue().toString(), termCombobox.getValue().toString(), previousSubjectField.getText(), false, colorBox.getValue().toString());
+            cancelOnAction(actionEvent);
         }
 
 
