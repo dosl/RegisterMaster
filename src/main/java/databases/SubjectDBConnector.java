@@ -237,6 +237,9 @@ public class SubjectDBConnector {
         try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
+            if (id.equals("")) {
+                return true;
+            }
             if (connection != null) {
                 String query = "Select status from subject where subject.subjectID=='" + id + "'";
                 //PreparedStatement p = connection.prepareStatement(query);
