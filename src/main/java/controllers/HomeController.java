@@ -40,6 +40,7 @@ public class HomeController {
     Alert resetAlert = new Alert(Alert.AlertType.CONFIRMATION,"All subject is reset",ButtonType.OK);
     Alert deleteAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to delete this subject", ButtonType.OK, ButtonType.CANCEL);
     Alert comboBoxAlert = new Alert(Alert.AlertType.WARNING,"Please fill all combo box",ButtonType.OK);
+    Alert addSameSubjectAlert = new Alert(Alert.AlertType.WARNING,"You Have regis for this subject");
     public void initialize(){
         yearCombobox.setItems(yearList);
         termCombobox.setItems(termList);
@@ -86,11 +87,17 @@ public class HomeController {
         });
 
     }
+    public void showAllOnAction(ActionEvent actionEvent){
+        tableView.setItems(SubjectDBConnector.getSubject());
+        tableView.refresh();
+    }
     public void goOnAction(ActionEvent actionEvent){
         if (termCombobox.getValue() == "Please Select" || yearCombobox.getValue() == "Please Select"){
             comboBoxAlert.show();
         }else{
+
             tableView.setItems(SubjectDBConnector.getSelectYearTerm(Integer.parseInt(yearCombobox.getSelectionModel().getSelectedItem().toString()),Integer.parseInt(termCombobox.getSelectionModel().getSelectedItem().toString())));
+            tableView.refresh();
         }
 //        SubjectDBConnector.getSelectYearTerm(Integer.parseInt(yearCombobox.getSelectionModel().getSelectedItem().toString()),Integer.parseInt(termCombobox.getSelectionModel().getSelectedItem().toString()));
     }
@@ -121,6 +128,8 @@ public class HomeController {
             }
         }
         tableView.refresh();
+        deleteButton.setDisable(true);
+        addButton.setDisable(true);
     }
     public void addOnAction(ActionEvent event) throws IOException {
 
@@ -139,6 +148,11 @@ public class HomeController {
                 tableView.refresh();
             }
         }
+        if(SubjectDBConnector.getStatus(selectedSubject.getSubjectID())){
+            addSameSubjectAlert.show();
+        }
+        addButton.setDisable(true);
+        deleteButton.setDisable(true);
 
     }
     public void editOnAction(ActionEvent event) throws IOException {

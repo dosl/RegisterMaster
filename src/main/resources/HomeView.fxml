@@ -85,5 +85,6 @@
       <Label layoutX="287.0" layoutY="545.0" text="Year" />
       <Label layoutX="568.0" layoutY="545.0" text="Term" />
       <Button fx:id="goButton" layoutX="806.0" layoutY="541.0" mnemonicParsing="false" onAction="#goOnAction" text="GO" />
+      <Button layoutX="1077.0" layoutY="33.0" mnemonicParsing="false" onAction="#showAllOnAction" text="Show All" />
     </children>
 </AnchorPane>
