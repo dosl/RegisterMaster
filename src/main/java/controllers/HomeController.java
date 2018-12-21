@@ -2,6 +2,8 @@ package controllers;
 
 import databases.SubjectDBConnector;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -20,19 +22,29 @@ import java.util.Optional;
 public class HomeController {
     private Subject subject;
     @FXML
-    Button createButton, reportButton,deleteButton,addButton,editButton;
+    ComboBox yearCombobox;
+    @FXML
+    ComboBox termCombobox;
+    @FXML
+    Button createButton, reportButton,deleteButton,addButton,editButton,goButton;
     @FXML
     TableView<Subject> tableView;
     @FXML
     TableColumn IDSubject,nameSubject,year,term,previousSubject,status,color;
     @FXML
     private TableColumn<Subject,String> level;
+    private ObservableList<String> termList = FXCollections.observableArrayList("1", "2");
+    private ObservableList<String> yearList = FXCollections.observableArrayList("1", "2", "3", "4");
     Alert errorAlert = new Alert(Alert.AlertType.WARNING, "You need to pass the previous subject", ButtonType.OK);
     Alert addAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to add this subject", ButtonType.OK, ButtonType.CANCEL);
     Alert resetAlert = new Alert(Alert.AlertType.CONFIRMATION,"All subject is reset",ButtonType.OK);
     Alert deleteAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to delete this subject", ButtonType.OK, ButtonType.CANCEL);
-
+    Alert comboBoxAlert = new Alert(Alert.AlertType.WARNING,"Please fill all combo box",ButtonType.OK);
     public void initialize(){
+        yearCombobox.setItems(yearList);
+        termCombobox.setItems(termList);
+        yearCombobox.setValue("Please Select");
+        termCombobox.setValue("Please Select");
         Subject selectedSubject = tableView.getSelectionModel().getSelectedItem();
         addButton.setDisable(true);
         deleteButton.setDisable(true);
@@ -73,6 +85,14 @@ public class HomeController {
             }
         });
 
+    }
+    public void goOnAction(ActionEvent actionEvent){
+        if (termCombobox.getValue() == "Please Select" || yearCombobox.getValue() == "Please Select"){
+            comboBoxAlert.show();
+        }else{
+            tableView.setItems(SubjectDBConnector.getSelectYearTerm(Integer.parseInt(yearCombobox.getSelectionModel().getSelectedItem().toString()),Integer.parseInt(termCombobox.getSelectionModel().getSelectedItem().toString())));
+        }
+//        SubjectDBConnector.getSelectYearTerm(Integer.parseInt(yearCombobox.getSelectionModel().getSelectedItem().toString()),Integer.parseInt(termCombobox.getSelectionModel().getSelectedItem().toString()));
     }
 
     public void createOnAction(ActionEvent actionEvent) throws IOException {

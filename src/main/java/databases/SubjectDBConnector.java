@@ -39,6 +39,34 @@ public class SubjectDBConnector {
         }
         return subjects;
     }
+    public static ObservableList getSelectYearTerm(int yearSql,int termSql) {
+        ObservableList<Subject> subjects = FXCollections.observableArrayList();
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if (connection != null) {
+                String query = "select * from Subject where Subject.Year == '" + yearSql + "' and Subject.Term == '" + termSql + "'";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()) {
+                    String id = resultSet.getString("subjectID");
+                    String name = resultSet.getString("subjectName");
+                    String year = resultSet.getString("year");
+                    String term = resultSet.getString("term");
+                    String previousSubject = resultSet.getString("previousSubject");
+                    boolean status = resultSet.getBoolean("status");
+                    String color = resultSet.getString("color");
+                    subjects.add(new Subject(id, name, year, term, previousSubject, status, color));
+                }
+                connection.close();
+            }
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return subjects;
+    }
 
     public static void resetSubject() {
         try {

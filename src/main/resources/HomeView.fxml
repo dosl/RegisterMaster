@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -79,5 +80,10 @@
             <Font size="24.0" />
          </font>
       </Button>
+      <ComboBox fx:id="yearCombobox" layoutX="342.0" layoutY="541.0" prefHeight="25.0" prefWidth="170.0" promptText="Year" />
+      <ComboBox fx:id="termCombobox" layoutX="622.0" layoutY="541.0" prefWidth="150.0" promptText="Term" />
+      <Label layoutX="287.0" layoutY="545.0" text="Year" />
+      <Label layoutX="568.0" layoutY="545.0" text="Term" />
+      <Button fx:id="goButton" layoutX="806.0" layoutY="541.0" mnemonicParsing="false" onAction="#goOnAction" text="GO" />
     </children>
 </AnchorPane>
