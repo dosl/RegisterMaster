@@ -245,7 +245,7 @@ public class SubjectDBConnector {
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()) {
                     String preid = resultSet.getString(1);
-                    //System.out.println("POOM "+preid);
+
 
                     connection.close();
                     return preid;

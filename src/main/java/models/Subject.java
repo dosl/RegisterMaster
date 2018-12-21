@@ -60,8 +60,9 @@ public class Subject {
         this.term = term;
     }
 
-    public boolean isStatus() {
-        return status;
+    public String isStatus() {
+        if (status) return "Pass";
+        else return "Not Pass";
     }
 
     public void setStatus(boolean status) {
@@ -75,6 +76,9 @@ public class Subject {
     public void setColor(String color) {
         this.color = color;
     }
+
+
+
 
     @Override
     public String toString() {

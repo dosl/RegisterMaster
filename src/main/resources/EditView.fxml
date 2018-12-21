@@ -59,22 +59,22 @@
       </Label>
       <TableView fx:id="tableView" layoutX="65.0" layoutY="49.0" prefHeight="380.0" prefWidth="1102.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="subjectID">
+            <TableColumn prefWidth="75.0" text="ID">
                <cellValueFactory>
                   <PropertyValueFactory property="subjectID" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="155.99996948242188" text="subjectName">
+            <TableColumn prefWidth="155.99996948242188" text="Name">
                <cellValueFactory>
                   <PropertyValueFactory property="subjectName" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="70.0" text="year">
+            <TableColumn prefWidth="70.0" text="Year">
                <cellValueFactory>
                   <PropertyValueFactory property="year" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="157.0" text="term">
+            <TableColumn prefWidth="157.0" text="Term">
                <cellValueFactory>
                   <PropertyValueFactory property="term" />
                </cellValueFactory>
@@ -89,7 +89,7 @@
                   <PropertyValueFactory property="status" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="level" prefWidth="95.0" text="Color">
+            <TableColumn fx:id="level" prefWidth="95.0" text="Level">
                <cellValueFactory>
                   <PropertyValueFactory property="color" />
                </cellValueFactory>

@@ -4,6 +4,7 @@ import databases.SubjectDBConnector;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -40,7 +41,7 @@ public class HomeController {
     Alert resetAlert = new Alert(Alert.AlertType.CONFIRMATION,"All subject is reset",ButtonType.OK);
     Alert deleteAlert = new Alert(Alert.AlertType.CONFIRMATION, "Are you sure to delete this subject", ButtonType.OK, ButtonType.CANCEL);
     Alert comboBoxAlert = new Alert(Alert.AlertType.WARNING,"Please fill all combo box",ButtonType.OK);
-    Alert addSameSubjectAlert = new Alert(Alert.AlertType.WARNING,"You Have regis for this subject");
+    Alert addSameSubjectAlert = new Alert(Alert.AlertType.WARNING,"You have already regis this subject");
     public void initialize(){
         yearCombobox.setItems(yearList);
         termCombobox.setItems(termList);
@@ -50,6 +51,7 @@ public class HomeController {
         addButton.setDisable(true);
         deleteButton.setDisable(true);
         tableView.setItems(SubjectDBConnector.getSubject());
+
         level.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getColor()));
         level.setCellFactory(column -> {
             return new TableCell<Subject, String>() {
@@ -85,7 +87,7 @@ public class HomeController {
                 }
             }
         });
-
+       // replaceBooleanToString();
     }
     public void showAllOnAction(ActionEvent actionEvent){
         tableView.setItems(SubjectDBConnector.getSubject());
@@ -135,22 +137,35 @@ public class HomeController {
 
         Subject selectedSubject = tableView.getSelectionModel().getSelectedItem();
         String preId = SubjectDBConnector.getPreviousId(selectedSubject.getSubjectID());
+        Optional<ButtonType> addSameSubjectResult = addSameSubjectAlert.showAndWait();
+
+        if(SubjectDBConnector.getStatus(selectedSubject.getSubjectID()) ) {
+            if (addSameSubjectResult.get().equals(ButtonType.OK)) {
+                
+            }
+
+        }
+
+
+
         boolean prestatus = SubjectDBConnector.isPreviousPassed(preId);
 
         Optional<ButtonType> result = addAlert.showAndWait();
+
+
         if (result.get().equals(ButtonType.OK)) {
-            if(prestatus == false){
+            if (prestatus == false) {
                 errorAlert.showAndWait();
-            }else {
+            } else {
                 Subject subject = (Subject) tableView.getSelectionModel().getSelectedItem();
                 SubjectDBConnector.addSubject(selectedSubject.getSubjectID(), selectedSubject.getSubjectName(), selectedSubject.getYear(), selectedSubject.getTerm());
                 tableView.setItems(SubjectDBConnector.getSubject());
                 tableView.refresh();
             }
         }
-        if(SubjectDBConnector.getStatus(selectedSubject.getSubjectID())){
-            addSameSubjectAlert.show();
-        }
+
+
+        replaceBooleanToString();
         addButton.setDisable(true);
         deleteButton.setDisable(true);
 
@@ -168,4 +183,18 @@ public class HomeController {
     public void setSubject(Subject subject) {
         this.subject = subject;
     }
+
+    public void replaceBooleanToString(){
+        if(tableView.getSelectionModel().getSelectedItem() != null) {
+            if (tableView.getSelectionModel().getSelectedItem().isStatus().equals("Pass")) {
+                tableView.getSelectionModel().getSelectedItem().setStatus(false);
+                tableView.refresh();
+
+            } else {
+                tableView.getSelectionModel().getSelectedItem().setStatus(true);
+                tableView.refresh();
+            }
+        }
+    }
+
 }
