@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditController">
+<AnchorPane prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.EditController">
    <children>
       <Label layoutX="369.0" layoutY="448.0" prefHeight="25.0" prefWidth="45.0" text="ชื่อวิชา">
          <font>
@@ -59,37 +59,37 @@
       </Label>
       <TableView fx:id="tableView" layoutX="65.0" layoutY="49.0" prefHeight="380.0" prefWidth="1102.0">
          <columns>
-            <TableColumn prefWidth="75.0" text="subjectID">
+            <TableColumn prefWidth="75.0" text="รหัสวิชา">
                <cellValueFactory>
                   <PropertyValueFactory property="subjectID" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="155.99996948242188" text="subjectName">
+            <TableColumn prefWidth="155.99996948242188" text="ชื่อวิชา">
                <cellValueFactory>
                   <PropertyValueFactory property="subjectName" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="70.0" text="year">
+            <TableColumn prefWidth="70.0" text="ปี">
                <cellValueFactory>
                   <PropertyValueFactory property="year" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="157.0" text="term">
+            <TableColumn prefWidth="157.0" text="เทอม">
                <cellValueFactory>
                   <PropertyValueFactory property="term" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="480.0" text="PreviousSubject">
+            <TableColumn prefWidth="480.0" text="วิชาก่อนหน้า">
                <cellValueFactory>
                   <PropertyValueFactory property="previousSubject" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn prefWidth="68.0" text="Status">
+            <TableColumn prefWidth="68.0" text="สถานะ">
                <cellValueFactory>
                   <PropertyValueFactory property="status" />
                </cellValueFactory>
             </TableColumn>
-            <TableColumn fx:id="level" prefWidth="95.0" text="Color">
+            <TableColumn fx:id="level" prefWidth="95.0" text="ความยาก">
                <cellValueFactory>
                   <PropertyValueFactory property="color" />
                </cellValueFactory>

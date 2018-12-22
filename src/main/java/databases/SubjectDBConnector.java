@@ -1,6 +1,5 @@
 package databases;
 
-//import controllers.TimeController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import models.Subject;
@@ -40,6 +39,35 @@ public class SubjectDBConnector {
         }
         return subjects;
     }
+    public static ObservableList getSelectYearTerm(int yearSql,int termSql) {
+        ObservableList<Subject> subjects = FXCollections.observableArrayList();
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if (connection != null) {
+                String query = "select * from Subject where Subject.Year == '" + yearSql + "' and Subject.Term == '" + termSql + "'";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+                while (resultSet.next()) {
+                    String id = resultSet.getString("subjectID");
+                    String name = resultSet.getString("subjectName");
+                    String year = resultSet.getString("year");
+                    String term = resultSet.getString("term");
+                    String previousSubject = resultSet.getString("previousSubject");
+                    boolean status = resultSet.getBoolean("status");
+                    String color = resultSet.getString("color");
+                    subjects.add(new Subject(id, name, year, term, previousSubject, status, color));
+                }
+                connection.close();
+            }
+        } catch (ClassNotFoundException ex) {
+            ex.printStackTrace();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return subjects;
+    }
+
     public static void resetSubject() {
         try {
             Class.forName(dbName);
@@ -115,12 +143,13 @@ public class SubjectDBConnector {
         }
         return id;
     }
+
     public static void deleteSubject(String id) {
         try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
-                String query = "Delete from subject where subject.subjectID=='" + id +"'";
+                String query = "Delete from subject where subject.subjectID=='" + id + "'";
                 PreparedStatement p = connection.prepareStatement(query);
                 p.executeUpdate();
                 connection.close();
@@ -132,9 +161,26 @@ public class SubjectDBConnector {
         }
     }
 
-    public static ArrayList<String> getPrevious(){
+    public static void editSubject(String id, String name, String year, String term, String previousSubject, String color) {
+        try {
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if (connection != null) {
+                String query = "update subject set subjectName = '" + name + "', term = '" + term + "', year = '" + year + "', color = '" + color + "', previousSubject = '" + previousSubject + "' where subjectID = '" + id + "'";
+                PreparedStatement p = connection.prepareStatement(query);
+                p.executeUpdate();
+                connection.close();
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static ArrayList<String> getPrevious() {
         ArrayList<String> preList = new ArrayList<String>();
-        try{
+        try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
@@ -156,22 +202,22 @@ public class SubjectDBConnector {
 
 
             }
-        }catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
 
-        }catch (ClassNotFoundException e){
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
         return preList;
     }
 
-    public static boolean getStatus(String id){
+    public static boolean getStatus(String id) {
         try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
             if (connection != null) {
                 String query = "Select status from subject where subject.subjectID=='" + id + "'";
- //               PreparedStatement p = connection.prepareStatement(query);
+                //               PreparedStatement p = connection.prepareStatement(query);
 //                p.executeUpdate();
                 Statement statement = connection.createStatement();
                 Boolean status = statement.execute(query);
@@ -186,7 +232,8 @@ public class SubjectDBConnector {
         }
         return false;
     }
-    public static String getPreviousId(String id){
+
+    public static String getPreviousId(String id) {
         try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
@@ -196,9 +243,9 @@ public class SubjectDBConnector {
                 //p.executeUpdate();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
-                while (resultSet.next()){
+                while (resultSet.next()) {
                     String preid = resultSet.getString(1);
-                    //System.out.println("POOM "+preid);
+
 
                     connection.close();
                     return preid;
@@ -213,8 +260,9 @@ public class SubjectDBConnector {
 
         return "error";
     }
-    public static boolean isPreviousPassed(String id){
-        try{
+
+    public static boolean isPreviousPassed(String id) {
+        try {
             Class.forName(dbName);
             Connection connection = DriverManager.getConnection(dbURL);
             if (id.equals("")) {
@@ -226,23 +274,45 @@ public class SubjectDBConnector {
                 //p.executeUpdate();
                 Statement statement = connection.createStatement();
                 ResultSet resultSet = statement.executeQuery(query);
-                while (resultSet.next()){
+                while (resultSet.next()) {
                     boolean status = resultSet.getBoolean(1);
-                    //boolean status = resultSet.getString(1);
-                    //System.out.println("POOM "+preid);
-
                     connection.close();
                     return status;
                 }
 
             }
 
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
+    public static String getId(String id){
+
+        try{
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if(connection != null){
+                String query = "Select subjectId from subject where subjectId == '"+id+"'";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+
+                while (resultSet.next()){
+                    String subjectid = resultSet.getString(1);
+                    connection.close();
+                    return subjectid;
+                }
+
+            }
         }catch (SQLException e){
             e.printStackTrace();
         }catch (ClassNotFoundException e){
             e.printStackTrace();
         }
-        return false;
+        return "";
     }
 
 
