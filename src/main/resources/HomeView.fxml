@@ -89,15 +89,6 @@
       <Label layoutX="865.0" layoutY="92.0" text="Term" />
       <Button fx:id="goButton" layoutX="1012.0" layoutY="88.0" mnemonicParsing="false" onAction="#goOnAction" text="GO" />
       <Button layoutX="1071.0" layoutY="88.0" mnemonicParsing="false" onAction="#showAllOnAction" text="Show All" />
-      <MenuBar layoutX="-2.0" layoutY="2.0" prefHeight="25.0" prefWidth="1200.0">
-        <menus>
-          <Menu mnemonicParsing="false" text="Menu">
-            <items>
-              <MenuItem fx:id="createMenuItems" mnemonicParsing="false" onAction="#createOnActionMenuItems" text="Create" />
-                  <MenuItem fx:id="editMenuItems" mnemonicParsing="false" onAction="#editOnActionMenuItems" text="Edit" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
+
     </children>
 </AnchorPane>

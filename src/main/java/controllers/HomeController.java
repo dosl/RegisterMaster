@@ -34,8 +34,8 @@ public class HomeController {
     TableColumn IDSubject,nameSubject,year,term,previousSubject,status,color;
     @FXML
     private TableColumn<Subject,String> level;
-    @FXML
-    private MenuItem createMenuItems,editMenuItems;
+//    @FXML
+//    private MenuItem createMenuItems,editMenuItems;
     @FXML
     private Parent parent;
 
@@ -111,25 +111,25 @@ public class HomeController {
 //        SubjectDBConnector.getSelectYearTerm(Integer.parseInt(yearCombobox.getSelectionModel().getSelectedItem().toString()),Integer.parseInt(termCombobox.getSelectionModel().getSelectedItem().toString()));
     }
 
-    public void createOnActionMenuItems(ActionEvent actionEvent) throws IOException{
-       // MenuItem menuItem = (MenuItem) actionEvent.getSource();
-        Stage stage = (Stage) parent.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateView.fxml"));
-        stage.setScene(new Scene((Parent) loader.load()));
-        CreateController createController = loader.getController();
-        createController.setSubject(subject);
-        stage.show();
+//    public void createOnActionMenuItems(ActionEvent actionEvent) throws IOException{
+//       // MenuItem menuItem = (MenuItem) actionEvent.getSource();
+//        Stage stage = (Stage) parent.getScene().getWindow();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateView.fxml"));
+//        stage.setScene(new Scene((Parent) loader.load()));
+//        CreateController createController = loader.getController();
+//        createController.setSubject(subject);
+//        stage.show();
+//
+//    }
 
-    }
-
-    public void editOnActionMenuItems(ActionEvent actionEvent) throws IOException{
-        Stage stage = (Stage) parent.getScene().getWindow();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditView.fxml"));
-        stage.setScene(new Scene((Parent) loader.load()));
-        EditController editController = loader.getController();
-        editController.setSubject(subject);
-        stage.show();
-    }
+//    public void editOnActionMenuItems(ActionEvent actionEvent) throws IOException{
+//        Stage stage = (Stage) parent.getScene().getWindow();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditView.fxml"));
+//        stage.setScene(new Scene((Parent) loader.load()));
+//        EditController editController = loader.getController();
+//        editController.setSubject(subject);
+//        stage.show();
+//    }
     public void createOnAction(ActionEvent actionEvent) throws IOException {
         Button button = (Button) actionEvent.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
