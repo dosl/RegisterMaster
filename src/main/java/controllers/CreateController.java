@@ -61,7 +61,7 @@ public class CreateController {
                 cancelOnAction(actionEvent);
             }
             else{
-                Alert idindatabaseAlert = new Alert(Alert.AlertType.WARNING,"This ID is already in Database");
+                Alert idindatabaseAlert = new Alert(Alert.AlertType.WARNING,"This SubjectID is already in Database");
                 idindatabaseAlert.show();
                 //System.out.println("GG");
             }
