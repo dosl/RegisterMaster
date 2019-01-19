@@ -19,11 +19,11 @@
                 <Font size="14.0" />
             </font>
         </Button>
-        <!--<Button fx:id="reportButton" layoutX="1012.0" layoutY="522.0" mnemonicParsing="false" onAction="#resetOnAction" text="Reset">-->
-            <!--<font>-->
-                <!--<Font size="24.0" />-->
-            <!--</font>-->
-        <!--</Button>-->
+        <Button fx:id="reportButton" layoutX="1012.0" layoutY="522.0" mnemonicParsing="false" onAction="#resetOnAction" text="Reset">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Button>
         <Button fx:id="deleteButton" layoutX="644.0" layoutY="522.0" mnemonicParsing="false" onAction="#deleteOnAction" prefHeight="51.0" prefWidth="101.0" text="ลบ">
             <font>
                 <Font size="24.0" />

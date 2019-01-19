@@ -92,8 +92,8 @@ public class EditController {
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/Error.fxml"));
             stage.setScene(new Scene((Parent) loader.load()));
-            ErrorController errorController = loader.getController();
-            errorController.setLabel("Please input all field");
+//            ErrorController errorController = loader.getController();
+//            errorController.setLabel("Please input all field");
             stage.show();
         } else {
             SubjectDBConnector.editSubject(subjectIDField.getText(),subjectNameField.getText(),yearCombobox.getValue().toString(),termCombobox.getValue().toString(),preSubjectField.getText(),levelComboBox.getValue().toString());

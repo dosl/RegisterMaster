@@ -276,9 +276,6 @@ public class SubjectDBConnector {
                 ResultSet resultSet = statement.executeQuery(query);
                 while (resultSet.next()) {
                     boolean status = resultSet.getBoolean(1);
-                    //boolean status = resultSet.getString(1);
-                    //System.out.println("POOM "+preid);
-
                     connection.close();
                     return status;
                 }
@@ -291,6 +288,31 @@ public class SubjectDBConnector {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public static String getId(String id){
+
+        try{
+            Class.forName(dbName);
+            Connection connection = DriverManager.getConnection(dbURL);
+            if(connection != null){
+                String query = "Select subjectId from subject where subjectId == '"+id+"'";
+                Statement statement = connection.createStatement();
+                ResultSet resultSet = statement.executeQuery(query);
+
+                while (resultSet.next()){
+                    String subjectid = resultSet.getString(1);
+                    connection.close();
+                    return subjectid;
+                }
+
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }catch (ClassNotFoundException e){
+            e.printStackTrace();
+        }
+        return "";
     }
 
 

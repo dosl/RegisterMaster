@@ -34,6 +34,11 @@ public class HomeController {
     TableColumn IDSubject,nameSubject,year,term,previousSubject,status,color;
     @FXML
     private TableColumn<Subject,String> level;
+//    @FXML
+//    private MenuItem createMenuItems,editMenuItems;
+    @FXML
+    private Parent parent;
+
     private ObservableList<String> termList = FXCollections.observableArrayList("1", "2");
     private ObservableList<String> yearList = FXCollections.observableArrayList("1", "2", "3", "4");
     Alert errorAlert = new Alert(Alert.AlertType.WARNING, "You need to pass the previous subject", ButtonType.OK);
@@ -92,6 +97,8 @@ public class HomeController {
     public void showAllOnAction(ActionEvent actionEvent){
         tableView.setItems(SubjectDBConnector.getSubject());
         tableView.refresh();
+        yearCombobox.setValue("Please select");
+        termCombobox.setValue("Please select");
     }
     public void goOnAction(ActionEvent actionEvent){
         if (termCombobox.getValue() == "Please Select" || yearCombobox.getValue() == "Please Select"){
@@ -104,6 +111,25 @@ public class HomeController {
 //        SubjectDBConnector.getSelectYearTerm(Integer.parseInt(yearCombobox.getSelectionModel().getSelectedItem().toString()),Integer.parseInt(termCombobox.getSelectionModel().getSelectedItem().toString()));
     }
 
+//    public void createOnActionMenuItems(ActionEvent actionEvent) throws IOException{
+//       // MenuItem menuItem = (MenuItem) actionEvent.getSource();
+//        Stage stage = (Stage) parent.getScene().getWindow();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/CreateView.fxml"));
+//        stage.setScene(new Scene((Parent) loader.load()));
+//        CreateController createController = loader.getController();
+//        createController.setSubject(subject);
+//        stage.show();
+//
+//    }
+
+//    public void editOnActionMenuItems(ActionEvent actionEvent) throws IOException{
+//        Stage stage = (Stage) parent.getScene().getWindow();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/EditView.fxml"));
+//        stage.setScene(new Scene((Parent) loader.load()));
+//        EditController editController = loader.getController();
+//        editController.setSubject(subject);
+//        stage.show();
+//    }
     public void createOnAction(ActionEvent actionEvent) throws IOException {
         Button button = (Button) actionEvent.getSource();
         Stage stage = (Stage) button.getScene().getWindow();
@@ -136,18 +162,8 @@ public class HomeController {
     public void addOnAction(ActionEvent event) throws IOException {
 
         Subject selectedSubject = tableView.getSelectionModel().getSelectedItem();
+        String status = selectedSubject.isStatus();
         String preId = SubjectDBConnector.getPreviousId(selectedSubject.getSubjectID());
-        Optional<ButtonType> addSameSubjectResult = addSameSubjectAlert.showAndWait();
-
-        if(SubjectDBConnector.getStatus(selectedSubject.getSubjectID()) ) {
-            if (addSameSubjectResult.get().equals(ButtonType.OK)) {
-                
-            }
-
-        }
-
-
-
         boolean prestatus = SubjectDBConnector.isPreviousPassed(preId);
 
         Optional<ButtonType> result = addAlert.showAndWait();
@@ -155,13 +171,25 @@ public class HomeController {
 
         if (result.get().equals(ButtonType.OK)) {
             if (prestatus == false) {
-                errorAlert.showAndWait();
+                Optional<ButtonType> acceptError = errorAlert.showAndWait();
+                if(acceptError.get().equals(ButtonType.OK)){
+                    return;
+                }
+
             } else {
                 Subject subject = (Subject) tableView.getSelectionModel().getSelectedItem();
                 SubjectDBConnector.addSubject(selectedSubject.getSubjectID(), selectedSubject.getSubjectName(), selectedSubject.getYear(), selectedSubject.getTerm());
                 tableView.setItems(SubjectDBConnector.getSubject());
                 tableView.refresh();
             }
+        }
+
+        if(status.equals("Pass") ) {
+            Optional<ButtonType> addSameSubjectResult = addSameSubjectAlert.showAndWait();
+            if (addSameSubjectResult.get().equals(ButtonType.OK)) {
+                return;
+            }
+
         }
 
 
@@ -194,6 +222,12 @@ public class HomeController {
                 tableView.getSelectionModel().getSelectedItem().setStatus(true);
                 tableView.refresh();
             }
+        }
+    }
+
+    public void replaceBooleanWithString(){
+        if(tableView.getSelectionModel().getSelectedItem() != null){
+
         }
     }
 
